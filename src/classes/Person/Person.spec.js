@@ -1,11 +1,9 @@
 const { PERSON_SELF_INTRO_MSG } = require("../../constants/character");
+const { MockPersonHelper } = require("../../helper/test");
 const { interpolate } = require("../../utils/string");
 const Person = require("./Person");
 
-const mockPersonName = "Mocky";
-function createMockPerson() {
-  return new Person(mockPersonName);
-}
+const { mockPersonName, createMockPerson } = MockPersonHelper;
 
 describe("Person class", () => {
   /** @type {Person} */
@@ -27,7 +25,9 @@ describe("Person class", () => {
   test("should get self introduction message", () => {
     const selfIntro = person.getSelfIntroduction();
     expect(selfIntro).toEqual(
-      interpolate(PERSON_SELF_INTRO_MSG, { name: mockPersonName })
+      interpolate(PERSON_SELF_INTRO_MSG, {
+        name: mockPersonName,
+      })
     );
   });
 });

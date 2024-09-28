@@ -1,26 +1,15 @@
 const { SUPERHERO_SELF_INTRO_MSG } = require("../../constants/character");
-const { SUPERPOWER_SCISSORS } = require("../../constants/superpower");
+const {
+  MockSuperheroHelper,
+  MockPersonHelper,
+  MockSuperpowerHelper,
+} = require("../../helper/test");
 const { interpolate } = require("../../utils/string");
-const Person = require("../Person/Person");
-const Superpower = require("../Superpower/Superpower");
 const Superhero = require("./Superhero");
 
-/** @type {import("../Superpower/Superpower").SuperpowerInfo} */
-const mockSuperpowerInfo = {
-  name: "Flight",
-  description: "Can hover and fly in the air",
-  power: SUPERPOWER_SCISSORS,
-};
-const mockPerson = new Person("Mocky");
-const mockHeroName = "Super Mocky";
-const mockSuperpower = new Superpower(
-  mockSuperpowerInfo.name,
-  mockSuperpowerInfo.description,
-  mockSuperpowerInfo.power
-);
-function createMockSuperhero() {
-  return new Superhero(mockPerson, mockHeroName, mockSuperpower);
-}
+const { mockHeroName, createMockSuperhero } = MockSuperheroHelper;
+const mockPerson = MockPersonHelper.createMockPerson();
+const mockSuperpower = MockSuperpowerHelper.createMockSuperpower();
 
 describe("Superhero class", () => {
   /** @type {Superhero} */
@@ -42,7 +31,9 @@ describe("Superhero class", () => {
   test("should get self introduction message", () => {
     const selfIntro = superhero.getSelfIntroduction();
     expect(selfIntro).toEqual(
-      interpolate(SUPERHERO_SELF_INTRO_MSG, { name: mockHeroName })
+      interpolate(SUPERHERO_SELF_INTRO_MSG, {
+        name: mockHeroName,
+      })
     );
   });
 

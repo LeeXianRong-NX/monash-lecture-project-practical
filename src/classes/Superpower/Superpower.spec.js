@@ -1,19 +1,7 @@
-const { SUPERPOWER_SCISSORS } = require("../../constants/superpower");
+const { MockSuperpowerHelper } = require("../../helper/test");
 const Superpower = require("./Superpower");
 
-/** @type {import("./Superpower").SuperpowerInfo} */
-const mockSuperpowerInfo = {
-  name: "Flight",
-  description: "Can hover and fly in the air",
-  power: SUPERPOWER_SCISSORS,
-};
-function createMockSuperpower() {
-  return new Superpower(
-    mockSuperpowerInfo.name,
-    mockSuperpowerInfo.description,
-    mockSuperpowerInfo.power
-  );
-}
+const { mockSuperpowerInfo, createMockSuperpower } = MockSuperpowerHelper;
 
 describe("Superpower class", () => {
   /** @type {Superpower} */

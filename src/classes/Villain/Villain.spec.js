@@ -1,26 +1,15 @@
 const { VILLAIN_SELF_INTRO_MSG } = require("../../constants/character");
-const { SUPERPOWER_SCISSORS } = require("../../constants/superpower");
+const {
+  MockVillainHelper,
+  MockPersonHelper,
+  MockSuperpowerHelper,
+} = require("../../helper/test");
 const { interpolate } = require("../../utils/string");
-const Person = require("../Person/Person");
-const Superpower = require("../Superpower/Superpower");
 const Villain = require("./Villain");
 
-/** @type {import("../Superpower/Superpower").SuperpowerInfo} */
-const mockSuperpowerInfo = {
-  name: "Flight",
-  description: "Can hover and fly in the air",
-  power: SUPERPOWER_SCISSORS,
-};
-const mockPerson = new Person("Mocky");
-const mockVillainName = "Evil Mocky";
-const mockSuperpower = new Superpower(
-  mockSuperpowerInfo.name,
-  mockSuperpowerInfo.description,
-  mockSuperpowerInfo.power
-);
-function createMockVillain() {
-  return new Villain(mockPerson, mockVillainName, mockSuperpower);
-}
+const { mockVillainName, createMockVillain } = MockVillainHelper;
+const mockPerson = MockPersonHelper.createMockPerson();
+const mockSuperpower = MockSuperpowerHelper.createMockSuperpower();
 
 describe("Villain class", () => {
   /** @type {Villain} */
