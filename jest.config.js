@@ -1,7 +1,9 @@
 /** @type {import('jest').Config} */
-export default {
+const config = {
   verbose: true,
   testEnvironment: "node",
   moduleFileExtensions: ["js"],
   coverageDirectory: "coverage",
 };
+
+module.exports = config;
