@@ -6,6 +6,7 @@ const { capitalizeAllWords, interpolate } = require("../../utils/string");
  */
 class Person {
   #name;
+  #hp;
 
   /**
    * Create Person object instance
@@ -13,6 +14,7 @@ class Person {
    */
   constructor(name) {
     this.#name = capitalizeAllWords(name);
+    this.#hp = 3;
   }
 
   /**
@@ -30,6 +32,22 @@ class Person {
   getSelfIntroduction() {
     const params = { name: this.#name };
     return interpolate(PERSON_SELF_INTRO_MSG, params);
+  }
+
+  /**
+   * Get current HP value
+   * @returns {number} Current HP number
+   */
+  getHp() {
+    return this.#hp;
+  }
+
+  /**
+   * Reduce HP value
+   * @param {boolean} [crit=false] - Condition if person was attacked with critical hit
+   */
+  reduceHp(crit = false) {
+    this.#hp = this.#hp - (crit ? 2 : 1);
   }
 }
 
