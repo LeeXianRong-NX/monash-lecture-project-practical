@@ -1,17 +1,4 @@
 /**
- * Superpower symbol values
- * @typedef {"✊" | "✌️" | "✋"} PowerValue
- */
-
-/**
- * Superpower info
- * @typedef {Object} SuperpowerInfo
- * @property {string} name - Name of superpower
- * @property {string} description - Description of superpower
- * @property {PowerValue} power - Power value of superpower
- */
-
-/**
  * Class to represent Superpower object
  */
 class Superpower {
@@ -23,7 +10,7 @@ class Superpower {
    *
    * @param {string} name
    * @param {string} description
-   * @param {PowerValue} power
+   * @param {import("./types").PowerValue} power
    */
   constructor(name, description, power) {
     this.#name = name;
@@ -49,7 +36,7 @@ class Superpower {
 
   /**
    * Get superpower power value
-   * @returns {PowerValue} Power value of superpower
+   * @returns {import("./types").PowerValue} Power value of superpower
    */
   getPower() {
     return this.#power;
@@ -57,7 +44,7 @@ class Superpower {
 
   /**
    * Get superpower info
-   * @returns {SuperpowerInfo} Information on superpower
+   * @returns {import("./types").SuperpowerInfo} Information on superpower
    */
   getInfo() {
     return {
