@@ -5,14 +5,14 @@
     4) Select a superpower value to play against the 
        villain every turn - ROCK, PAPER, SCISSORS!
     5) Whoever loses the turn will lose 1 HP.
-    6) Whoever wins with their chosen superpower, the 
-       loser will lose 2 HP.
+    6) Whoever wins with their chosen superpower 
+       (critical hit), the loser will lose 2 HP.
     7) Nobody will lose HP if both draw with the same 
        superpower value chosen.
     8) Whoever loses all HP first will be the loser, 
        the other will be the winner.
 
-                    [Y] Start Game
+                    [S] Start Game
                     [Q] Quit
 
             Press matching key to continue

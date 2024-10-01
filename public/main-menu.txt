@@ -1,5 +1,5 @@
 
-                    [Y] Start Game
+                    [S] Start Game
                     [H] How To Play
                     [Q] Quit
 
