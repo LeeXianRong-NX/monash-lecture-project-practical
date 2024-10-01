@@ -1,7 +1,5 @@
-const Person = require("../../classes/Person/Person");
-const Superhero = require("../../classes/Superhero/Superhero");
-const Villain = require("../../classes/Villain/Villain");
-const { MockSuperpowerHelper } = require("./superpower");
+const { Person, Superhero, Villain } = require("../../../classes");
+const { MockSuperpowerHelper } = require("../superpower");
 const { createMockSuperpower } = MockSuperpowerHelper;
 
 // Helper function to mock Person object
