@@ -5,7 +5,7 @@ const {
   MockSuperpowerHelper,
 } = require("../../helper/test");
 const { interpolate } = require("../../utils/string");
-const Superhero = require("./Superhero");
+const Superhero = require("./");
 
 const { mockHeroName, createMockSuperhero } = MockSuperheroHelper;
 const mockPerson = MockPersonHelper.createMockPerson();

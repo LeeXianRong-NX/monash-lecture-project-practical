@@ -1,7 +1,7 @@
 const { SUPERHERO_SELF_INTRO_MSG } = require("../../constants/character");
 const { interpolate } = require("../../utils/string");
-const Person = require("../Person/Person");
-const { Superpower } = require("../Superpower/Superpower");
+const Person = require("../person");
+const Superpower = require("../superpower");
 
 /**
  * Class to represent a Superhero object
