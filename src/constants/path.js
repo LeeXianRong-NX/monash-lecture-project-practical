@@ -20,8 +20,8 @@ exports.SELECT_SUPERPOWER_UI_PATH = path.resolve(
   this.PUBLIC_DIR_PATH,
   "select-superpower.txt"
 );
-exports.GAME_IN_PROGRESS_UI_PATH = path.resolve(
+exports.START_TURN_UI_PATH = path.resolve(
   this.PUBLIC_DIR_PATH,
-  "game-in-progress.txt"
+  "start-turn.txt"
 );
 exports.QUIT_UI_PATH = path.resolve(this.PUBLIC_DIR_PATH, "quit.txt");
