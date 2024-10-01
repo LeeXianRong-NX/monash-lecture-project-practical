@@ -1,4 +1,4 @@
-const { interpolate } = require("./interpolate");
+const { interpolate } = require("./");
 
 describe("Interpolate string utility function", () => {
   test("should replace placeholder key in string", () => {

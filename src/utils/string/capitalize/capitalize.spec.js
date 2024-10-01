@@ -1,4 +1,4 @@
-const { capitalize, capitalizeAllWords } = require("./capitalize");
+const { capitalize, capitalizeAllWords } = require("./");
 
 describe("Capitalize string utility function", () => {
   test("should capitalize first character of string", () => {
