@@ -25,4 +25,5 @@ exports.START_TURN_UI_PATH = path.resolve(
   "start-turn.txt"
 );
 exports.NEXT_TURN_UI_PATH = path.resolve(this.PUBLIC_DIR_PATH, "next-turn.txt");
+exports.END_GAME_UI_PATH = path.resolve(this.PUBLIC_DIR_PATH, "end-game.txt");
 exports.QUIT_UI_PATH = path.resolve(this.PUBLIC_DIR_PATH, "quit.txt");
