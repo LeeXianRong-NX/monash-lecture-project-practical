@@ -5,7 +5,7 @@ const {
   MockSuperpowerHelper,
 } = require("../../helper/test");
 const { interpolate } = require("../../utils/string");
-const Villain = require("./Villain");
+const Villain = require("./");
 
 const { mockVillainName, createMockVillain } = MockVillainHelper;
 const mockPerson = MockPersonHelper.createMockPerson();
