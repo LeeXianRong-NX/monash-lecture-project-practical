@@ -1,9 +1,7 @@
 const { SUPERHERO_SELF_INTRO_MSG } = require("../../constants/character");
-const {
-  MockSuperheroHelper,
-  MockPersonHelper,
-  MockSuperpowerHelper,
-} = require("../../helper/test");
+const { TestMockHelpers } = require("../../helper");
+const { MockSuperheroHelper, MockPersonHelper, MockSuperpowerHelper } =
+  TestMockHelpers;
 const { interpolate } = require("../../utils/string");
 const Superhero = require("./");
 

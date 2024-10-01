@@ -1,9 +1,9 @@
 const { PERSON_SELF_INTRO_MSG } = require("../../constants/character");
-const { MockPersonHelper } = require("../../helper/test");
+const { TestMockHelpers } = require("../../helper");
+const { MockPersonHelper } = TestMockHelpers;
+const { mockPersonName, createMockPerson } = MockPersonHelper;
 const { interpolate } = require("../../utils/string");
 const Person = require("./");
-
-const { mockPersonName, createMockPerson } = MockPersonHelper;
 
 describe("Person class", () => {
   /** @type {Person} */

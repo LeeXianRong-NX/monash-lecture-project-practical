@@ -1,4 +1,5 @@
-const { MockSuperpowerHelper } = require("../../helper/test");
+const { TestMockHelpers } = require("../../helper");
+const { MockSuperpowerHelper } = TestMockHelpers;
 const Superpower = require("./");
 
 const { mockSuperpowerInfo, createMockSuperpower } = MockSuperpowerHelper;

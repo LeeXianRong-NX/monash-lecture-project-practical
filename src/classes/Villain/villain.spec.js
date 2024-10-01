@@ -1,9 +1,7 @@
 const { VILLAIN_SELF_INTRO_MSG } = require("../../constants/character");
-const {
-  MockVillainHelper,
-  MockPersonHelper,
-  MockSuperpowerHelper,
-} = require("../../helper/test");
+const { TestMockHelpers } = require("../../helper");
+const { MockVillainHelper, MockPersonHelper, MockSuperpowerHelper } =
+  TestMockHelpers;
 const { interpolate } = require("../../utils/string");
 const Villain = require("./");
 
