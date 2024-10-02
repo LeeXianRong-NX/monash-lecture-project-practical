@@ -2,6 +2,11 @@
 exports.SUPERPOWER_ROCK = "✊";
 exports.SUPERPOWER_SCISSORS = "✌️";
 exports.SUPERPOWER_PAPER = "✋";
+exports.SUPERPOWER_POWER_LIST = [
+  this.SUPERPOWER_ROCK,
+  this.SUPERPOWER_SCISSORS,
+  this.SUPERPOWER_PAPER,
+];
 
 // Super strength superpower
 exports.SUPER_STRENGTH_NAME = "Super Strength";
