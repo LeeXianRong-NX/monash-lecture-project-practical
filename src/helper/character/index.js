@@ -3,13 +3,8 @@ const {
   DEFAULT_VILLAIN_PERSON_NAME,
   DEFAULT_VILLAIN__NAME,
 } = require("../../constants/character");
-const {
-  SUPERPOWER_1_KEY,
-  SUPERPOWER_2_KEY,
-  SUPERPOWER_3_KEY,
-} = require("../../constants/keys");
 const { randomise } = require("../../utils/number/randomise");
-const { getSuperpowerFromKeySelection } = require("../superpower");
+const { PRESET_SUPERPOWERS } = require("../superpower");
 
 /**
  * Helper to create Person object
@@ -48,15 +43,12 @@ function createVillainObject(personName, villainName, superpower) {
  * @returns {Villain}
  */
 function createDefaultVillain() {
-  const superpowers = [SUPERPOWER_1_KEY, SUPERPOWER_2_KEY, SUPERPOWER_3_KEY];
+  const superpowers = Object.values(PRESET_SUPERPOWERS);
   const randomIndex = randomise(0, superpowers.length - 1);
-  const randomSuperpower = getSuperpowerFromKeySelection(
-    superpowers[randomIndex]
-  );
   return createVillainObject(
     DEFAULT_VILLAIN_PERSON_NAME,
     DEFAULT_VILLAIN__NAME,
-    randomSuperpower
+    superpowers[randomIndex]
   );
 }
 
