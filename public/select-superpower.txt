@@ -1,0 +1,17 @@
+
+                Choose your own superpower:
+
+                1) Super Strength - ✊
+                   Wield extraordinary power 
+
+                2) Flight - ✌️
+                   Soar freely in the skies
+
+                3) Laser Vision - ✋
+                   Incinerate all that you can see
+
+                    [A] Super Strength
+                    [B] Flight
+                    [C] Laser Vision
+
+            Press matching key to continue

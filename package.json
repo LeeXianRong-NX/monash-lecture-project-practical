@@ -2,7 +2,7 @@
   "name": "monash-lecture-project-practical",
   "private": "true",
   "version": "0.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "node src/index.js",
     "test": "jest",

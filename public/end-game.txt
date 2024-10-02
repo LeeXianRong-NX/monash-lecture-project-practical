@@ -1,0 +1,14 @@
+
+                     Turn {{turnNum}}
+
+          Superhero {{heroMove}}  {{villainMove}}  Villain
+
+                      {{turnResult}}
+
+                  {{critMsg}}
+
+        {{heroName}} has {{heroHp}} HP remaining...
+        {{villainName}} has {{villainHp}} HP remaining...
+
+          {{winnerName}} is the winner!
+

@@ -1,0 +1,6 @@
+
+                    [S] Start Game
+                    [H] How To Play
+                    [Q] Quit
+
+            Press matching key to continue
