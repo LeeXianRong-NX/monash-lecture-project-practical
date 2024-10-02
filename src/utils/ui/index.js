@@ -1,7 +1,7 @@
 const fs = require("node:fs");
 const console = require("node:console");
 const { HEADER_UI_PATH } = require("../../constants/path");
-const { promptUserInput } = require("../../service/readline");
+const { promptUserInput } = require("../../services/readline");
 
 /**
  * Get UI string data from file source

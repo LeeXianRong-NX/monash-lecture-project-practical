@@ -1,3 +1,3 @@
-const { displayMainMenu } = require("./service/game");
+const { displayMainMenu } = require("./services/game");
 
 displayMainMenu();

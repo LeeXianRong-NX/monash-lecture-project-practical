@@ -1,5 +1,5 @@
 const { PERSON_SELF_INTRO_MSG } = require("../../constants/character");
-const { TestMockHelpers } = require("../../helper");
+const { TestMockHelpers } = require("../../helpers");
 const { MockPersonHelper } = TestMockHelpers;
 const { mockPersonName, createMockPerson } = MockPersonHelper;
 const { interpolate } = require("../../utils/string");

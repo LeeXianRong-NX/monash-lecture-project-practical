@@ -12,33 +12,33 @@ const {
   END_GAME_UI_PATH,
 } = require("../../constants/path");
 const { START_GAME_KEY, HELP_KEY, QUIT_KEY } = require("../../constants/keys");
-const { capitalize, interpolate } = require("../../utils/string");
 const {
-  getUserInterfaceFromSource,
-  displayUserInterface,
-} = require("../../utils/ui");
-const { setReadlinePrompt, promptUserInput } = require("../readline");
-const {
-  getSuperpowerFromKeySelection,
-  getPowerFromKeySelection,
-} = require("../../helper/superpower");
+  GAME_TURN_WIN_RESULT,
+  GAME_TURN_LOSE_RESULT,
+} = require("../../constants/game");
+const { SUPERPOWER_POWER_LIST } = require("../../constants/superpower");
 const {
   createSuperheroObject,
   createDefaultVillain,
-} = require("../../helper/character");
-const { SUPERPOWER_POWER_LIST } = require("../../constants/superpower");
-const { randomise } = require("../../utils/number/randomise");
+} = require("../../helpers/character");
 const {
   getTurnResult,
   getTurnHasCriticalHit,
   isCriticalHit,
   checkIsPlayerWinner,
   getTurnEndUIStringParams,
-} = require("../../helper/game");
+} = require("../../helpers/game");
 const {
-  GAME_TURN_WIN_RESULT,
-  GAME_TURN_LOSE_RESULT,
-} = require("../../constants/game");
+  getSuperpowerFromKeySelection,
+  getPowerFromKeySelection,
+} = require("../../helpers/superpower");
+const { randomise } = require("../../utils/number/randomise");
+const { capitalize, interpolate } = require("../../utils/string");
+const {
+  getUserInterfaceFromSource,
+  displayUserInterface,
+} = require("../../utils/ui");
+const { setReadlinePrompt, promptUserInput } = require("../readline");
 
 /** @type {number} */
 let turnNum = 0;
