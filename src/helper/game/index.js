@@ -25,7 +25,7 @@ function isCriticalHit(move, power) {
  * @param {boolean} isVillainCrit - Boolean value if villain has landed critical hit
  * @returns {boolean}
  */
-function turnHasCriticalHit(isHeroCrit, isVillainCrit) {
+function getTurnHasCriticalHit(isHeroCrit, isVillainCrit) {
   return isHeroCrit || isVillainCrit;
 }
 
@@ -35,7 +35,7 @@ function turnHasCriticalHit(isHeroCrit, isVillainCrit) {
  * @param {number} villainHp - Villain HP number value
  * @returns {boolean | null}
  */
-function isPlayerWinner(heroHp, villainHp) {
+function checkIsPlayerWinner(heroHp, villainHp) {
   if (heroHp > 0 && villainHp <= 0) return true;
   if (heroHp <= 0 && villainHp > 0) return false;
   return null;
@@ -71,19 +71,28 @@ function getTurnEndUIStringParams(payload) {
     heroMove: payload.heroMove,
     villainMove: payload.villainMove,
     turnResult: payload.turnResult,
-    critMsg: payload.hasCriticalHit ? "CRITICAL HIT" : null,
+    critMsg: payload.hasCriticalHit ? "CRITICAL HIT" : "",
     heroName: payload.superhero.getName(),
     villainName: payload.villain.getName(),
-    heroHp: payload.superhero.getHp(),
-    villainHp: payload.villain.getHp(),
+    heroHp: getHpDisplay(payload.superhero.getHp()),
+    villainHp: getHpDisplay(payload.villain.getHp()),
     winnerName: payload.winnerName,
   };
 }
 
+/**
+ * Get number to display for HP
+ * @param {number} hp
+ * @returns {number}
+ */
+function getHpDisplay(hp) {
+  return hp <= 0 ? 0 : hp;
+}
+
 module.exports = {
   isCriticalHit,
-  turnHasCriticalHit,
-  isPlayerWinner,
+  getTurnHasCriticalHit,
+  checkIsPlayerWinner,
   getTurnResult,
   getTurnEndUIStringParams,
 };

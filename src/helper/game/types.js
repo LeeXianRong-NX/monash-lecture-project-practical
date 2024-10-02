@@ -26,7 +26,7 @@ const Villain = require("../../classes/villain");
  * @property {string} heroMove
  * @property {string} villainMove
  * @property {string} turnResult
- * @property {string | null} critMsg
+ * @property {string} critMsg
  * @property {string} heroName
  * @property {string} villainName
  * @property {number} heroHp
