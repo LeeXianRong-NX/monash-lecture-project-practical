@@ -12,4 +12,3 @@
 
           {{winnerName}} is the winner!
 
-                    [Q] Quit
