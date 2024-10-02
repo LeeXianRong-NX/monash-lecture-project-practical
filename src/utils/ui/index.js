@@ -1,7 +1,7 @@
 const fs = require("node:fs");
 const console = require("node:console");
 const { HEADER_UI_PATH } = require("../../constants/path");
-const { promptUserInput } = require("../readline");
+const { promptUserInput } = require("../../service/readline");
 
 /**
  * Get UI string data from file source
@@ -24,7 +24,7 @@ function displayHeaderUserInterface() {
 /**
  * Display UI string in command line output and run callback function on user input prompt
  * @param {string} ui - Game UI string to display
- * @param {import("../readline/types").promptInputCallback | undefined} callback - Optional callback function to run on user input
+ * @param {import("../../service/readline/types").promptInputCallback | undefined} callback - Optional callback function to run on user input
  */
 function displayUserInterface(ui, callback) {
   console.clear();
