@@ -2,7 +2,7 @@ const { Superpower } = require("../../../classes");
 const { SUPERPOWER_SCISSORS } = require("../../../constants/superpower");
 
 // Helper function to mock Superpower object
-/** @type {import("src/classes/superpower/types").SuperpowerInfo} */
+/** @type {import("../../../classes/superpower/types").SuperpowerInfo} */
 const mockSuperpowerInfo = {
   name: "Flight",
   description: "Can hover and fly in the air",
