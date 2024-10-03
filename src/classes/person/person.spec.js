@@ -30,4 +30,23 @@ describe("Person class", () => {
       })
     );
   });
+
+  test("should get person HP", () => {
+    const hp = person.getHp();
+    expect(hp).toEqual(3);
+  });
+
+  describe("should test reduce HP", () => {
+    test("should reduce 1 HP", () => {
+      person.reduceHp();
+      const hp = person.getHp();
+      expect(hp).toEqual(2);
+    });
+
+    test("should reduce 2 HP if critical hit is true", () => {
+      person.reduceHp(true);
+      const hp = person.getHp();
+      expect(hp).toEqual(1);
+    });
+  });
 });
