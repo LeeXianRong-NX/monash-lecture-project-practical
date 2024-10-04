@@ -1,5 +1,5 @@
 const { SUPERHERO_SELF_INTRO_MSG } = require("../../constants/character");
-const { interpolate } = require("../../utils/string");
+const { interpolate, capitalizeAllWords } = require("../../utils/string");
 const Person = require("../person");
 const Superpower = require("../superpower");
 
@@ -20,7 +20,7 @@ class Superhero extends Person {
   constructor(person, heroName, superpower) {
     super(person.getName());
     this.#person = person;
-    this.#heroName = heroName;
+    this.#heroName = capitalizeAllWords(heroName);
     this.#superpower = superpower;
   }
 

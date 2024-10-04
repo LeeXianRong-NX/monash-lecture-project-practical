@@ -1,5 +1,6 @@
+const console = require("node:console");
 const process = require("node:process");
-const { Superhero, Villain } = require("../../classes/");
+const Game = require("../../classes/game");
 const {
   MAIN_MENU_UI_PATH,
   QUIT_UI_PATH,
@@ -40,93 +41,24 @@ const {
 } = require("../../utils/ui");
 const { setReadlinePrompt, promptUserInput } = require("../readline");
 
-/** @type {number} */
-let turnNum = 0;
-/** @type {string} */
-let personName;
-/** @type {string} */
-let heroName;
-/** @type {Superhero} */
-let superhero;
-/** @type {Villain} */
-let villain;
-
-// Update game context
+/** @type {Game | null} */
+let gameInstance = null;
+let personName = "";
+let heroName = "";
 
 /**
- *
- * @returns {number}
+ * Initialise game instance for service
+ * @param {Game} game
  */
-function getTurnNum() {
-  return turnNum;
+function initGame(game) {
+  gameInstance = game;
 }
 
-function setNextTurn() {
-  turnNum++;
-}
-
-/**
- *
- * @returns {string}
- */
-function getPersonName() {
-  return personName;
-}
-
-/**
- *
- * @param {string} name
- */
-function setPersonName(name) {
-  personName = name;
-}
-
-/**
- *
- * @returns {string}
- */
-function getHeroName() {
-  return heroName;
-}
-
-/**
- *
- * @param {string} name
- */
-function setHeroName(name) {
-  heroName = name;
-}
-
-/**
- *
- * @returns {Superhero}
- */
-function getSuperhero() {
-  return superhero;
-}
-
-/**
- *
- * @param {Superhero} superheroObj
- */
-function setSuperhero(superheroObj) {
-  superhero = superheroObj;
-}
-
-/**
- *
- * @returns {Villain}
- */
-function getVillain() {
-  return villain;
-}
-
-/**
- *
- * @param {Villain} villainObj
- */
-function setVillain(villainObj) {
-  villain = villainObj;
+/** Start game service if game instance is initialised */
+function startGame() {
+  if (gameInstance !== null) {
+    displayMainMenu();
+  }
 }
 
 // UI Display
@@ -180,12 +112,10 @@ function displayStartTurn() {
   setReadlinePrompt("Choose a move");
   const startTurnUi = getUserInterfaceFromSource(START_TURN_UI_PATH);
   displayUserInterface(startTurnUi);
-  console.log(
-    `${getVillain().getName()}: ${getVillain().getSelfIntroduction()}\r\n`
-  );
-  console.log(
-    `${getSuperhero().getName()}: ${getSuperhero().getSelfIntroduction()}\r\n`
-  );
+  const villain = gameInstance.getBotVillain();
+  const superhero = gameInstance.getPlayerSuperhero();
+  console.log(`${villain.getName()}: ${villain.getSelfIntroduction()}\r\n`);
+  console.log(`${superhero.getName()}: ${superhero.getSelfIntroduction()}\r\n`);
   promptUserInput(gameTurnCallback);
 }
 
@@ -222,13 +152,13 @@ function helpInstructionsInputCallback(input) {
 
 /** @type {import("../readline/types").promptInputCallback} */
 function createPersonCallback(input) {
-  setPersonName(input);
+  personName = input;
   displayCreateSuperhero();
 }
 
 /** @type {import("../readline/types").promptInputCallback} */
 function createSuperheroCallback(input) {
-  setHeroName(input);
+  heroName = input;
   displaySelectSuperpower();
 }
 
@@ -237,17 +167,23 @@ function selectSuperpowerCallback(input) {
   const superpower = getSuperpowerFromKeySelection(capitalize(input));
   if (superpower === null) promptUserInput(selectSuperpowerCallback);
   else {
-    setSuperhero(
-      createSuperheroObject(getPersonName(), getHeroName(), superpower)
+    const playerSuperhero = createSuperheroObject(
+      personName,
+      heroName,
+      superpower
     );
-    setVillain(createDefaultVillain());
+    gameInstance.setPlayerSuperhero(playerSuperhero);
+    gameInstance.setBotVillain(createDefaultVillain());
     displayStartTurn();
   }
 }
 
 /** @type {import("../readline/types").promptInputCallback} */
 function gameTurnCallback(input) {
-  setNextTurn();
+  gameInstance.updateTurn();
+  const superhero = gameInstance.getPlayerSuperhero();
+  const villain = gameInstance.getBotVillain();
+
   const heroMove = getPowerFromKeySelection(capitalize(input));
   if (heroMove === null) promptUserInput(gameTurnCallback);
   else {
@@ -259,24 +195,24 @@ function gameTurnCallback(input) {
     // check if superhero or villain has critical hit
     const isHeroCrit = isCriticalHit(
       heroMove,
-      getSuperhero().getSuperpower().getPower()
+      superhero.getSuperpower().getPower()
     );
     const isVillainCrit = isCriticalHit(
       villainMove,
-      getVillain().getSuperpower().getPower()
+      villain.getSuperpower().getPower()
     );
     const turnHasCriticalHit = getTurnHasCriticalHit(isHeroCrit, isVillainCrit);
 
     // reduce HP for either superhero or villain
     if (turnResult === GAME_TURN_WIN_RESULT)
-      getVillain().reduceHp(turnHasCriticalHit);
+      villain.reduceHp(turnHasCriticalHit);
     if (turnResult === GAME_TURN_LOSE_RESULT)
-      getSuperhero().reduceHp(turnHasCriticalHit);
+      superhero.reduceHp(turnHasCriticalHit);
 
     // check if player meets winning condition
     const isPlayerWinner = checkIsPlayerWinner(
-      getSuperhero().getHp(),
-      getVillain().getHp()
+      superhero.getHp(),
+      villain.getHp()
     );
 
     let nextUi = getUserInterfaceFromSource(
@@ -284,19 +220,19 @@ function gameTurnCallback(input) {
     );
     /** @type {import("../../helper/game/types").turnEndUIInterpolatePayload} */
     const payload = {
-      turnNum: getTurnNum(),
+      turnNum: gameInstance.getTurnNumber(),
       heroMove: heroMove,
       villainMove: villainMove,
       turnResult: turnResult,
       hasCriticalHit: turnHasCriticalHit,
-      superhero: getSuperhero(),
-      villain: getVillain(),
+      superhero: superhero,
+      villain: villain,
       winnerName:
         isPlayerWinner === null
           ? null
           : isPlayerWinner
-          ? getSuperhero().getName()
-          : getVillain().getName(),
+          ? superhero.getName()
+          : villain.getName(),
     };
     nextUi = interpolate(nextUi, getTurnEndUIStringParams(payload));
 
@@ -315,6 +251,8 @@ function endGameCallback() {
 }
 
 module.exports = {
+  initGame,
+  startGame,
   displayMainMenu,
   displayHelpInstructions,
   displayQuitGame,
@@ -322,4 +260,11 @@ module.exports = {
   displayCreateSuperhero,
   displaySelectSuperpower,
   displayStartTurn,
+  mainMenuInputCallback,
+  helpInstructionsInputCallback,
+  createPersonCallback,
+  createSuperheroCallback,
+  selectSuperpowerCallback,
+  gameTurnCallback,
+  endGameCallback,
 };
