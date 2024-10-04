@@ -1,3 +1,10 @@
-const { displayMainMenu } = require("./services/game");
+const Game = require("./classes/game");
+const { initGame, startGame } = require("./services/game");
 
-displayMainMenu();
+function init() {
+  const game = new Game();
+  initGame(game);
+  startGame();
+}
+
+init();
