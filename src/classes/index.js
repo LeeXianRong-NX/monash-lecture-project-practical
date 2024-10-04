@@ -1,3 +1,4 @@
+const Game = require("./game");
 const Person = require("./person");
 const Superhero = require("./superhero");
 const Superpower = require("./superpower");
@@ -8,4 +9,5 @@ module.exports = {
   Superhero,
   Villain,
   Superpower,
+  Game,
 };

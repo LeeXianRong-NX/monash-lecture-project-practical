@@ -1,4 +1,4 @@
-const Game = require("./classes/game");
+const { Game } = require("./classes");
 const { initGame, startGame } = require("./services/game");
 
 function init() {
