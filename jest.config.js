@@ -4,6 +4,7 @@ const config = {
   testEnvironment: "node",
   moduleFileExtensions: ["js"],
   coverageDirectory: "coverage",
+  collectCoverageFrom: ["src/**/*.js"],
 };
 
 module.exports = config;
