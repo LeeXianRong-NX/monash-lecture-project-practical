@@ -1,5 +1,6 @@
+const console = require("node:console");
 const process = require("node:process");
-const { Superhero, Villain } = require("../../classes/");
+const Game = require("../../classes/game");
 const {
   MAIN_MENU_UI_PATH,
   QUIT_UI_PATH,
@@ -20,7 +21,6 @@ const { SUPERPOWER_POWER_LIST } = require("../../constants/superpower");
 const {
   createSuperheroObject,
   createDefaultVillain,
-  createPersonObject,
 } = require("../../helpers/character");
 const {
   getTurnResult,
@@ -40,7 +40,6 @@ const {
   displayUserInterface,
 } = require("../../utils/ui");
 const { setReadlinePrompt, promptUserInput } = require("../readline");
-const Game = require("../../classes/game");
 
 /** @type {Game | null} */
 let gameInstance = null;
@@ -261,4 +260,11 @@ module.exports = {
   displayCreateSuperhero,
   displaySelectSuperpower,
   displayStartTurn,
+  mainMenuInputCallback,
+  helpInstructionsInputCallback,
+  createPersonCallback,
+  createSuperheroCallback,
+  selectSuperpowerCallback,
+  gameTurnCallback,
+  endGameCallback,
 };
