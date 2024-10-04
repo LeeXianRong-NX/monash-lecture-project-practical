@@ -1,99 +1,61 @@
 const readline = require("node:readline");
 const { stdin, stdout } = require("node:process");
 const {
-  initReadlineInterface,
-  pauseReadline,
-  resumeReadline,
+  getReadlineInterface,
   setReadlinePrompt,
-  getReadlinePrompt,
-  promptNewReadline,
-  closeReadline,
-  askQuestionReadline,
-} = require("./readline");
+  promptUserInput,
+} = require(".");
 
-describe("readline service", () => {
-  /** @type {readline.Interface} */
-  let mockRlInterface = {
-    pause: jest.fn(),
-    resume: jest.fn(),
+jest.mock("node:readline", () => ({
+  createInterface: jest.fn().mockReturnValue({
+    question: jest
+      .fn()
+      .mockImplementation((input, callback) => callback(input)),
     setPrompt: jest.fn(),
-    getPrompt: jest.fn().mockReturnValue("test>"),
-    prompt: jest.fn(),
-    question: jest.fn((question, callback) => {}),
-    close: jest.fn(),
-  };
-  let mockRlCreateInterface;
+    getPrompt: jest.fn(),
+  }),
+}));
+
+describe("Readline service methods", () => {
+  /** @type {readline.Interface} */
+  let rl = null;
 
   beforeEach(() => {
-    mockRlCreateInterface = jest
-      .spyOn(readline, "createInterface")
-      .mockReturnValue(mockRlInterface);
+    jest.resetModules();
+    rl = getReadlineInterface();
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    rl = null;
   });
 
-  test("should initialize new readline interface instance", () => {
-    initReadlineInterface();
-    expect(mockRlCreateInterface).toHaveBeenCalledWith({
+  test("should create new readline interface and return the new interface", () => {
+    expect(readline.createInterface).toHaveBeenCalledWith({
       input: stdin,
       output: stdout,
     });
+    expect(rl).not.toBeNull();
   });
 
-  test("should not initialize new readline interface instance if existing one found", () => {
-    initReadlineInterface();
-    initReadlineInterface();
-    expect(mockRlCreateInterface).toHaveBeenCalledTimes(0);
+  test("should get existing readline interface", () => {
+    rl = getReadlineInterface();
+    expect(readline.createInterface).toHaveBeenCalledTimes(1);
+    expect(rl).not.toBeNull();
   });
 
-  test("should pause readline interface", () => {
-    pauseReadline();
-    expect(mockRlInterface.pause).toHaveBeenCalled();
-  });
-
-  test("should resume readline interface", () => {
-    resumeReadline();
-    expect(mockRlInterface.resume).toHaveBeenCalled();
-  });
-
-  test("should set readline interface prompt", () => {
-    const prompt = "test>";
+  test("should set readline prompt with prompt string provided", () => {
+    const prompt = "This is prompt";
     setReadlinePrompt(prompt);
-    expect(mockRlInterface.setPrompt).toHaveBeenCalledWith(prompt);
+    expect(rl.setPrompt).toHaveBeenCalledWith(`${prompt} > `);
   });
 
-  test("should get readline interface prompt", () => {
-    const prompt = "test>";
-    setReadlinePrompt(prompt);
-    const result = getReadlinePrompt();
-    expect(mockRlInterface.getPrompt).toHaveBeenCalled();
-    expect(result).toEqual(prompt);
-  });
+  test("should prompt for user input and execute callback function provided", () => {
+    /** @type {import("./types").promptInputCallback} */
+    const callback = (input) => {};
+    const prompt = rl.getPrompt();
 
-  test("should prompt new readline for user input", () => {
-    promptNewReadline();
-    expect(mockRlInterface.prompt).toHaveBeenCalled();
-  });
-
-  test("should display question and prompt for user input", () => {
-    const prompt = "test>";
-    const question = "What is your question?";
-    const callback = (answer) => {};
-    askQuestionReadline(question, callback);
-    expect(mockRlInterface.question).toHaveBeenCalledWith(
-      `${prompt} ${question}`,
-      callback
-    );
-  });
-
-  test("should close readline interface", () => {
-    closeReadline();
-    expect(mockRlInterface.close).toHaveBeenCalled();
-  });
-
-  test("should throw error if no readline interface instance found", () => {
-    expect(() => pauseReadline()).toThrow();
+    promptUserInput(callback);
+    expect(rl.getPrompt).toHaveBeenCalled();
+    expect(rl.question).toHaveBeenCalledWith(prompt, callback);
   });
 });
